@@ -11,7 +11,7 @@ set nocompatible
 "スワップファイル用のディレクトリ
 set directory=$HOME/vimbackup
 "タブの代わりに空白文字を挿入する
-set expandtab
+"set expandtab
 "変更中のファイルでも、保存しないで他のファイルを表示
 set hidden
 "インクリメンタルサーチを行う

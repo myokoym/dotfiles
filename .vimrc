@@ -51,6 +51,10 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\t\+\|\s\+$/
 augroup END
 
+" vim-endwise
+let g:endwise_no_mappings = 1
+autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
+
 " ----------------------------------------------------
 "   neobundle
 " ----------------------------------------------------
@@ -64,6 +68,9 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " add plugins
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'kana/vim-smartinput'
 
 filetype plugin on
 

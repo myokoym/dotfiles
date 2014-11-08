@@ -52,9 +52,9 @@ augroup HighlightTrailingSpaces
 augroup END
 
 " vim-endwise
-let g:endwise_no_mappings = 1
-autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
-
+"let g:endwise_no_mappings = 1
+"autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
+"
 " po.vim
 let g:po_translator="Masafumi Yokoyama <myokoym@gmail.com>"
 "let g:po_lang_team="LANGUAGE TEAM <E-MAIL at ADDRESS or HOME PAGE>"
@@ -68,6 +68,11 @@ let g:po_translator="Masafumi Yokoyama <myokoym@gmail.com>"
 "    \   'outputter' : 'browser',
 "    \ },
 "    \}
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 " ----------------------------------------------------
 "   neobundle
@@ -83,7 +88,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " add plugins
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'tpope/vim-endwise'
+"NeoBundle 'tpope/vim-endwise'
 NeoBundle 'kana/vim-smartinput'
 NeoBundle 'mattn/flappyvird-vim'
 NeoBundle 'Shougo/vimproc.vim'
@@ -91,6 +96,8 @@ NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
+NeoBundle 'cohama/lexima.vim'
+NeoBundle 'haya14busa/incsearch.vim'
 
 filetype plugin on
 

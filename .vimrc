@@ -11,7 +11,7 @@ set nocompatible
 "スワップファイル用のディレクトリ
 set directory=$HOME/vimbackup
 "タブの代わりに空白文字を挿入する
-"set expandtab
+set expandtab
 "変更中のファイルでも、保存しないで他のファイルを表示
 set hidden
 "インクリメンタルサーチを行う
@@ -55,6 +55,20 @@ augroup END
 let g:endwise_no_mappings = 1
 autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
 
+" po.vim
+let g:po_translator="Masafumi Yokoyama <myokoym@gmail.com>"
+"let g:po_lang_team="LANGUAGE TEAM <E-MAIL at ADDRESS or HOME PAGE>"
+
+" quickrun
+"au BufNewFile,BufRead *.textile set filetype=textile
+"let g:quickrun_config = {
+"    \ 'textile': {
+"    \   'command'   : 'redcloth',
+"    \   'exec'      : '%c  %s',
+"    \   'outputter' : 'browser',
+"    \ },
+"    \}
+
 " ----------------------------------------------------
 "   neobundle
 " ----------------------------------------------------
@@ -71,6 +85,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'kana/vim-smartinput'
+NeoBundle 'mattn/flappyvird-vim'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/gist-vim'
 
 filetype plugin on
 

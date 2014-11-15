@@ -42,7 +42,8 @@ set whichwrap=b,s,h,l,<,>,[,]
 "set nowrapscan
 
 "ペースト時にインデントしない
-set paste
+"有効にするとautoindentやend補完がおかしくなる
+"set paste
 
 "行末の空白をハイライトする
 augroup HighlightTrailingSpaces

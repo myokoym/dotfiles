@@ -1,3 +1,4 @@
+syntax on
 "新しい行のインデントを現在行と同じにする
 set autoindent
 "バックアップファイルを作るディレクトリ
@@ -42,7 +43,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 "set nowrapscan
 
 "ペースト時にインデントしない
-set paste
+"set paste
 
 "行末の空白をハイライトする
 augroup HighlightTrailingSpaces
@@ -50,3 +51,40 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
   autocmd VimEnter,WinEnter * match TrailingSpaces /\t\+\|\s\+$/
 augroup END
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" ----------------------------------------------------
+"   neobundle
+" ----------------------------------------------------
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" add plugins
+NeoBundle 'thinca/vim-quickrun'
+"NeoBundle 'tpope/vim-endwise'
+NeoBundle 'kana/vim-smartinput'
+NeoBundle 'mattn/flappyvird-vim'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/gist-vim'
+NeoBundle 'cohama/agit.vim'
+NeoBundle 'cohama/lexima.vim'
+NeoBundle 'haya14busa/incsearch.vim'
+
+filetype plugin on
+
+call neobundle#end()
+
+NeoBundleCheck

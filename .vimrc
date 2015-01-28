@@ -43,6 +43,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 "set nowrapscan
 
 "ペースト時にインデントしない
+"有効にするとautoindentやend補完がおかしくなる
 "set paste
 
 "行末の空白をハイライトする
@@ -51,6 +52,24 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
   autocmd VimEnter,WinEnter * match TrailingSpaces /\t\+\|\s\+$/
 augroup END
+
+" vim-endwise
+let g:endwise_no_mappings = 1
+autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
+
+" po.vim
+let g:po_translator="Masafumi Yokoyama <myokoym@gmail.com>"
+"let g:po_lang_team="LANGUAGE TEAM <E-MAIL at ADDRESS or HOME PAGE>"
+
+" quickrun
+au BufNewFile,BufRead *.textile set filetype=textile
+let g:quickrun_config = {
+    \ 'textile': {
+    \   'command'   : 'redcloth',
+    \   'exec'      : '%c  %s',
+    \   'outputter' : 'browser',
+    \ },
+    \}
 
 " incsearch
 map /  <Plug>(incsearch-forward)

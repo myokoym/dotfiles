@@ -1,12 +1,13 @@
 # LANG
 export LANG=ja_JP.UTF-8
+#export LANG=C
 
 # KEYBIND
 bindkey -v
 bindkey "" history-incremental-search-backward
 
 # PROMPT
-PROMPT='%{%(?..$fg[red])%}%%%{$reset_color%} '
+PROMPT='sakura2%{%(?..$fg[red])%}%%%{$reset_color%} '
 PROMPT2="> "
 SPROMPT="%r is correct? [n,y,a,e]: "
 RPROMPT='[%{$fg[magenta]%}$(ruby -e "print RUBY_VERSION, %(p), RUBY_PATCHLEVEL") `rprompt-git-current-branch`%F{cyan}%~%f]'
@@ -197,8 +198,8 @@ alias bemm='bundle exec middleman'
 ## jokey git alias
 alias gtat='git status'
 alias gta='git status'
-alias giff='git diff'
-alias gog='git log'
+alias giff='git diff --color'
+alias gog='git log --color'
 alias ghow='git show'
 alias gdd='git add'
 alias gommit='git commit'
@@ -209,18 +210,18 @@ alias gheo='git checkout'
 alias geset='git reset'
 
 # Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
 # android tools
 ## old
 #export PATH=${PATH}:/home/myokoym/android/android-sdk-linux_x86/tools
 #export PATH=${PATH}:/home/myokoym/android/android-sdk-linux_x86/platform-tools
-export ANDROID_HOME=/home/myokoym/bin/android-sdk-linux
-export PATH=${PATH}:$ANDROID_HOME/tools
-export PATH=${PATH}:$ANDROID_HOME/platform-tools
+#export ANDROID_HOME=/home/myokoym/bin/android-sdk-linux
+#export PATH=${PATH}:$ANDROID_HOME/tools
+#export PATH=${PATH}:$ANDROID_HOME/platform-tools
 
 # touchpad disabled
-xinput set-prop 10 "Device Enabled" 0
+#xinput set-prop 10 "Device Enabled" 0
 
 export VIMRUNTIME=/usr/share/vim/vim74
 
@@ -237,13 +238,13 @@ eval "$(rbenv init -)"
 
 # retter settings
 export EDITOR=vim
-export RETTER_HOME=`pwd`/myokoym.github.com
+export RETTER_HOME=`pwd`/work/github/myokoym.github.com
 
 # mikutter settings
-export MIKUTTER_HOME=`pwd`/mikutter
+#export MIKUTTER_HOME=`pwd`/mikutter
 
 # sylpheed settings
-#export LD_LIBRARY_PATH=/usr/local/lib
+#export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
 
 # groonga building
 export GROONGA_DIR=$HOME/work/groonga
@@ -253,4 +254,5 @@ export CUTTER_DIR=$HOME/work/cutter
 export CUTTER_SOURCE_PATH=$HOME/work/cutter/cutter
 
 # pkg-config
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig
+#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+#export PKG_CONFIG_LIBDIR=$PKG_CONFIG_LIBDIR:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig

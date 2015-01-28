@@ -90,8 +90,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " add plugins
 NeoBundle 'thinca/vim-quickrun'
-"NeoBundle 'tpope/vim-endwise'
-NeoBundle 'kana/vim-smartinput'
+NeoBundle 'tpope/vim-endwise'
+"NeoBundle 'kana/vim-smartinput'
 NeoBundle 'mattn/flappyvird-vim'
 NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'Shougo/vimshell.vim'
@@ -99,7 +99,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'cohama/agit.vim'
-NeoBundle 'cohama/lexima.vim'
+"NeoBundle 'cohama/lexima.vim'
 NeoBundle 'haya14busa/incsearch.vim'
 
 filetype plugin on

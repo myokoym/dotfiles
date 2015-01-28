@@ -1,0 +1,13 @@
+[user]
+	name = Masafumi Yokoyama
+	email = myokoym@gmail.com
+[core]
+	editor = vim
+[color]
+	ui = true
+[alias]
+	co = checkout
+	l = log -p --decorate --stat
+	br = branch
+	st = status
+	di = diff

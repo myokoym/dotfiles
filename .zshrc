@@ -254,3 +254,7 @@ export CUTTER_SOURCE_PATH=$HOME/work/cutter/cutter
 
 # pkg-config
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig
+
+# ssh-agent
+eval `ssh-agent`
+ssh-add

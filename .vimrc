@@ -22,7 +22,7 @@ set incsearch
 "listで表示される文字のフォーマットを指定する
 "set listchars=eol:$,tab:>\ ,extends:<
 "行番号を表示する
-"set number
+set number
 "シフト移動幅
 "set shiftwidth=4
 set shiftwidth=2

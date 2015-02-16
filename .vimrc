@@ -53,6 +53,9 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\t\+\|\s\+$/
 augroup END
 
+" vimgrepで常にquickfix-windowを開く（|cw する）
+autocmd QuickFixCmdPost *grep* cwindow
+
 " vim-endwise
 let g:endwise_no_mappings = 1
 autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd

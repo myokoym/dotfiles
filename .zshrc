@@ -207,6 +207,7 @@ alias gomm='git commit -m'
 alias grah='git branch'
 alias gheo='git checkout'
 alias geset='git reset'
+alias gg='git grep'
 
 # Load RVM into a shell session *as a function*
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

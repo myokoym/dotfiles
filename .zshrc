@@ -209,18 +209,18 @@ alias gheo='git checkout'
 alias geset='git reset'
 
 # Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # android tools
 ## old
 #export PATH=${PATH}:/home/myokoym/android/android-sdk-linux_x86/tools
 #export PATH=${PATH}:/home/myokoym/android/android-sdk-linux_x86/platform-tools
-export ANDROID_HOME=/home/myokoym/bin/android-sdk-linux
-export PATH=${PATH}:$ANDROID_HOME/tools
-export PATH=${PATH}:$ANDROID_HOME/platform-tools
+#export ANDROID_HOME=/home/myokoym/bin/android-sdk-linux
+#export PATH=${PATH}:$ANDROID_HOME/tools
+#export PATH=${PATH}:$ANDROID_HOME/platform-tools
 
 # touchpad disabled
-xinput set-prop 10 "Device Enabled" 0
+#xinput set-prop 10 "Device Enabled" 0
 
 export VIMRUNTIME=/usr/share/vim/vim74
 
@@ -232,15 +232,15 @@ export VIMRUNTIME=/usr/share/vim/vim74
 #sudo sh -c "echo -n 255 > /sys/devices/platform/i8042/serio1/serio2/sensitivity"
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
 # retter settings
-export EDITOR=vim
-export RETTER_HOME=`pwd`/myokoym.github.com
+#export EDITOR=vim
+#export RETTER_HOME=`pwd`/myokoym.github.com
 
 # mikutter settings
-export MIKUTTER_HOME=`pwd`/mikutter
+#export MIKUTTER_HOME=`pwd`/mikutter
 
 # sylpheed settings
 #export LD_LIBRARY_PATH=/usr/local/lib

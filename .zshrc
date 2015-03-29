@@ -248,7 +248,7 @@ export MIKUTTER_HOME=`pwd`/mikutter
 # groonga building
 export GROONGA_DIR=$HOME/work/groonga
 export GROONGA_CLONE_DIR=$HOME/work/groonga/groonga.clean
-export GROONGA_GITHUB_COM_PATH=$HOME/work/groonga/groonga.github.com
+export GROONGA_ORG_PATH=$HOME/work/groonga/groonga.org
 export CUTTER_DIR=$HOME/work/cutter
 export CUTTER_SOURCE_PATH=$HOME/work/cutter/cutter
 

@@ -267,3 +267,12 @@ export PATH=/tmp/local/bin:/usr/local/bin:$PATH
 # ssh-agent
 #eval `ssh-agent`
 #ssh-add
+
+function chpwd {
+  [ -n $TMUX ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD
+}
+function tmux_neww {
+  tmux neww "cd $(tmux display -p "\$TMUXPWD_#I"); exec $SHELL"
+}
+zle -N tmux_neww
+bindkey "" tmux_neww

@@ -181,18 +181,23 @@ alias l='ls -CF'
 
 ## my aliases
 alias lt='ls -AltrF'
-alias hi='history 1'
-alias r=rails
+alias hi='history'
+alias hii='history 1'
+alias ra=rails
 alias g=git
 alias rre='rbenv rehash'
 alias be='bundle exec'
 alias v='vim'
-alias e='emacs'
-alias enw='emacs -nw'
+#alias e='emacs'
+#alias enw='emacs -nw'
 alias gren='gren --color'
 alias miru='mireru'
 alias mm='middleman'
 alias bemm='bundle exec middleman'
+alias ej='termit en ja'
+alias je='termit ja en'
+alias aps='aptitude search'
+alias par='padrino rake'
 
 ## jokey git alias
 alias gtat='git status'

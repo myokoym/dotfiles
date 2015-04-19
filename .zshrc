@@ -238,8 +238,8 @@ export VIMRUNTIME=/usr/share/vim/vim74
 #sudo sh -c "echo -n 255 > /sys/devices/platform/i8042/serio1/serio2/sensitivity"
 
 # rbenv
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # retter settings
 #export EDITOR=vim
@@ -262,7 +262,7 @@ export CUTTER_SOURCE_PATH=$HOME/work/cutter/cutter
 export PKG_CONFIG_PATH=/tmp/local/lib/pkgconfig:/usr/local/lib/pkgconfig:$/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 
 export LD_LIBRARY_PATH=/tmp/local/lib:/usr/local/lib:$LD_LIBRARY_PATH
-export PATH=/tmp/local/bin:/usr/local/bin:$PATH
+export PATH=/tmp/local/bin:$PATH
 
 # ssh-agent
 #eval `ssh-agent`

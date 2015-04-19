@@ -268,6 +268,35 @@ export PATH=/tmp/local/bin:$PATH
 #eval `ssh-agent`
 #ssh-add
 
+# Ruby-GNOME2
+rg2home=~/work/ruby/ruby-gnome2
+for name in glib2 \
+            atk \
+            cairo-gobject \
+            clutter \
+            clutter-gstreamer \
+            clutter-gtk \
+            gdk3 \
+            gdk_pixbuf2 \
+            gio2 \
+            gobject-introspection \
+            gstreamer \
+            gtk2 \
+            gtk3 \
+            gtksourceview2 \
+            gtksourceview3 \
+            gvlc \
+            pango \
+            poppler \
+            rsvg2 \
+            vte \
+            vte3 \
+            webkit-gtk \
+            webkit-gtk2
+do
+  export LD_LIBRARY_PATH=$rg2home/$name/ext/$name:$LD_LIBRARY_PATH
+done
+
 function chpwd {
   [ -n $TMUX ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD
 }

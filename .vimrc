@@ -36,11 +36,14 @@ set smartindent
 set smarttab
 "ファイル内の <Tab> が対応する空白の数
 "set tabstop=4
-set tabstop=2
+set tabstop=8
 "カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 "検索をファイルの先頭へループしない
 "set nowrapscan
+
+"タブをタブとして扱う（スペースに展開しない）
+"set noexpandtab
 
 "ペースト時にインデントしない
 "有効にするとautoindentやend補完がおかしくなる

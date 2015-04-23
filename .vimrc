@@ -82,6 +82,34 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+" JpFormat.vim
+let JpCountChars = 35
+" 日本語の行の連結時には空白を入力しない。
+set formatoptions+=mM
+
+" 現在行を整形
+nnoremap <silent> gl :JpFormat<CR>
+vnoremap <silent> gl :JpFormat<CR>
+
+" 現在行が整形対象外でも強制的に整形
+nnoremap <silent> gL :JpFormat!<CR>
+vnoremap <silent> gL :JpFormat!<CR>
+
+" 自動整形のON/OFF切替
+" 30gC の様にカウント指定すると、現バッファのみ折り返し文字数を指定されたカウントに変更します。
+nnoremap <silent> gC :JpFormatToggle<CR>
+
+" カーソル位置の分割行をまとめてヤンク
+nnoremap <silent> gY :JpYank<CR>
+vnoremap <silent> gY :JpYank<CR>
+" カーソル位置の分割行をまとめて連結
+nnoremap <silent> gJ :JpJoin<CR>
+vnoremap <silent> gJ :JpJoin<CR>
+
+" 外部ビューアを起動する
+nnoremap <silent> <F8> :JpExtViewer<CR>
+
+
 " ----------------------------------------------------
 "   neobundle
 " ----------------------------------------------------
@@ -107,6 +135,9 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'cohama/agit.vim'
 "NeoBundle 'cohama/lexima.vim'
 NeoBundle 'haya14busa/incsearch.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'hrsh7th/vim-versions'
+NeoBundle 'fuenor/JpFormat.vim'
 
 filetype plugin on
 

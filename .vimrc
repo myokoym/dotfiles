@@ -84,32 +84,26 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 " JpFormat.vim
+"" 原稿文字数(全角の折り返し文字数)
 let JpCountChars = 35
-" 日本語の行の連結時には空白を入力しない。
+"" 日本語の行の連結時には空白を入力しない。
 set formatoptions+=mM
-
-" 現在行を整形
+"" 現在行を整形
 nnoremap <silent> gl :JpFormat<CR>
 vnoremap <silent> gl :JpFormat<CR>
-
-" 現在行が整形対象外でも強制的に整形
-nnoremap <silent> gL :JpFormat!<CR>
-vnoremap <silent> gL :JpFormat!<CR>
-
-" 自動整形のON/OFF切替
-" 30gC の様にカウント指定すると、現バッファのみ折り返し文字数を指定されたカウントに変更します。
-nnoremap <silent> gC :JpFormatToggle<CR>
-
-" カーソル位置の分割行をまとめてヤンク
-nnoremap <silent> gY :JpYank<CR>
-vnoremap <silent> gY :JpYank<CR>
-" カーソル位置の分割行をまとめて連結
-nnoremap <silent> gJ :JpJoin<CR>
-vnoremap <silent> gJ :JpJoin<CR>
-
-" 外部ビューアを起動する
+"" 自動整形のON/OFF切替
+"" 30gCの様にカウント指定すると、現バッファのみ折り返し文字数を指定されたカウントに変更します。
+nnoremap <silent> gc :JpFormatToggle<CR>
+"" 現バッファを整形
+nnoremap <silent> g,rJ :JpFormatAll<CR>
+"" 原稿枚数カウント
+nnoremap <silent> g,rc :JpCountPages!<CR>
+"" 外部ビューアを起動する
 nnoremap <silent> <F8> :JpExtViewer<CR>
 
+" Enable slim syntax highlight
+autocmd FileType slim setlocal foldmethod=indent
+autocmd BufNewFile,BufRead *.slim set filetype=slim
 
 " ----------------------------------------------------
 "   neobundle
@@ -139,9 +133,10 @@ NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'hrsh7th/vim-versions'
 NeoBundle 'fuenor/JpFormat.vim'
-
-filetype plugin on
+NeoBundle 'slim-template/vim-slim'
 
 call neobundle#end()
+
+filetype plugin indent on
 
 NeoBundleCheck

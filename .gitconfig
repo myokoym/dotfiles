@@ -12,3 +12,5 @@
 	st = status
 	di = diff
 	ci = commit
+[push]
+	default = simple

@@ -134,6 +134,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'hrsh7th/vim-versions'
 NeoBundle 'fuenor/JpFormat.vim'
 NeoBundle 'slim-template/vim-slim'
+NeoBundle 'tomtom/tcomment_vim'
 
 call neobundle#end()
 

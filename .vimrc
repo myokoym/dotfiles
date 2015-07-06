@@ -135,6 +135,9 @@ NeoBundle 'hrsh7th/vim-versions'
 NeoBundle 'fuenor/JpFormat.vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'JuliaLang/julia-vim'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'scrooloose/nerdtree'
 
 call neobundle#end()
 

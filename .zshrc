@@ -258,6 +258,8 @@ export GROONGA_ORG_PATH=$HOME/work/groonga/groonga.org
 export CUTTER_DIR=$HOME/work/cutter
 export CUTTER_SOURCE_PATH=$HOME/work/cutter/cutter
 
+export MROONGA_GITHUB_COM_PATH=$HOME/work/groonga/mroonga.github.com
+
 # pkg-config
 export PKG_CONFIG_PATH=/tmp/local/lib/pkgconfig:/usr/local/lib/pkgconfig:$/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 

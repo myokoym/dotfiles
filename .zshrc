@@ -305,3 +305,7 @@ function tmux_neww {
 }
 zle -N tmux_neww
 bindkey "" tmux_neww
+
+export PATH=$PATH:~/packer/
+export GOPATH=~/go
+export PATH=$PATH:~/go/bin/

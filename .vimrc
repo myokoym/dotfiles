@@ -139,6 +139,7 @@ NeoBundle 'JuliaLang/julia-vim'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+NeoBundle 'othree/html5.vim'
 
 call neobundle#end()
 

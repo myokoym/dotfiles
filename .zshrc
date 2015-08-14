@@ -261,7 +261,7 @@ export CUTTER_SOURCE_PATH=$HOME/work/cutter/cutter
 export MROONGA_GITHUB_COM_PATH=$HOME/work/groonga/mroonga.github.com
 
 # pkg-config
-export PKG_CONFIG_PATH=/tmp/local/lib/pkgconfig:/usr/local/lib/pkgconfig:$/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/tmp/local/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 
 export LD_LIBRARY_PATH=/tmp/local/lib:/usr/local/lib:$LD_LIBRARY_PATH
 export PATH=/tmp/local/bin:$PATH

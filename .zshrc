@@ -157,6 +157,7 @@ alias -g L="|& $PAGER"
 alias -g WC="| wc"
 alias -g LC="| wc -l"
 alias -g Z="| tail"
+alias -g CB="| xclip -selection clipboard"
 
 
 # 以下は.bashrcと共用
@@ -244,6 +245,8 @@ eval "$(rbenv init -)"
 # retter settings
 #export EDITOR=vim
 #export RETTER_HOME=`pwd`/myokoym.github.com
+export EDITOR=vim
+export RETTER_HOME=$HOME/work/blog/myokolog
 
 # mikutter settings
 #export MIKUTTER_HOME=`pwd`/mikutter
@@ -263,7 +266,7 @@ export MROONGA_GITHUB_COM_PATH=$HOME/work/groonga/mroonga.github.com
 # pkg-config
 export PKG_CONFIG_PATH=/tmp/local/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 
-export LD_LIBRARY_PATH=/tmp/local/lib:/usr/local/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/tmp/local/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
 export PATH=/tmp/local/bin:$PATH
 
 # ssh-agent
@@ -311,6 +314,13 @@ bindkey "" tmux_neww
 export PATH=$PATH:~/packer/
 export GOPATH=~/go
 export PATH=$PATH:~/go/bin/
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+export AWS_USER_NAME=myokoym
+export AWS_DEFAULT_PROFILE=${AWS_USER_NAME}
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

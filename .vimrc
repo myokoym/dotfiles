@@ -105,6 +105,15 @@ nnoremap <silent> <F8> :JpExtViewer<CR>
 autocmd FileType slim setlocal foldmethod=indent
 autocmd BufNewFile,BufRead *.slim set filetype=slim
 
+" nerdtree
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeChDirMode = 2
+let NERDTreeWinSize = 25
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+if !argc()
+  autocmd vimenter * NERDTree|normal gg3j
+endif
+
 " ----------------------------------------------------
 "   neobundle
 " ----------------------------------------------------

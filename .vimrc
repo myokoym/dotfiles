@@ -105,6 +105,8 @@ nnoremap <silent> <F8> :JpExtViewer<CR>
 autocmd FileType slim setlocal foldmethod=indent
 autocmd BufNewFile,BufRead *.slim set filetype=slim
 
+autocmd BufNewFile,BufRead *.es6 set filetype=javascript
+
 " nerdtree
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 2
@@ -152,6 +154,9 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'nvie/vim-rst-tables'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'vim-scripts/po.vim'
 
 call neobundle#end()
 

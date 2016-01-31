@@ -140,6 +140,9 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'othree/html5.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-surround'
 
 call neobundle#end()
 

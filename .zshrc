@@ -184,7 +184,7 @@ alias l='ls -CF'
 alias lt='ls -AltrF'
 alias hi='history'
 alias hii='history 1'
-alias ra=rails
+#alias ra=rails
 alias g=git
 alias rre='rbenv rehash'
 alias be='bundle exec'
@@ -243,7 +243,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # retter settings
-#export EDITOR=vim
+export EDITOR=vim
 #export RETTER_HOME=`pwd`/myokoym.github.com
 export EDITOR=vim
 export RETTER_HOME=$HOME/work/blog/myokolog
@@ -261,6 +261,9 @@ export GROONGA_ORG_PATH=$HOME/work/groonga/groonga.org
 export CUTTER_DIR=$HOME/work/cutter
 export CUTTER_SOURCE_PATH=$HOME/work/cutter/cutter
 
+# Mroonga building
+export MROONGA_DIR=$HOME/work/groonga
+export MROONGA_CLONE_DIR=$HOME/work/groonga/mroonga.clean
 export MROONGA_GITHUB_COM_PATH=$HOME/work/groonga/mroonga.github.com
 
 # pkg-config
@@ -319,8 +322,16 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-export AWS_USER_NAME=myokoym
-export AWS_DEFAULT_PROFILE=${AWS_USER_NAME}
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+export GOPATH=$HOME/.go
+export PATH=$GOPATH/bin:$PATH
+
+export GRNENV_HOME=$HOME/.grnenv
+export PATH=$GRNENV_HOME/bin:$GRNENV_HOME/shims:$PATH
+eval "$(grnenv export)"
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line

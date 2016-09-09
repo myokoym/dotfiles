@@ -65,7 +65,7 @@ let g:endwise_no_mappings = 1
 autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
 
 " po.vim
-let g:po_translator="Masafumi Yokoyama <myokoym@gmail.com>"
+let g:po_translator="Masafumi Yokoyama <yokoyama@clear-code.com>"
 "let g:po_lang_team="LANGUAGE TEAM <E-MAIL at ADDRESS or HOME PAGE>"
 
 " quickrun
@@ -85,7 +85,7 @@ map g/ <Plug>(incsearch-stay)
 
 " JpFormat.vim
 "" 原稿文字数(全角の折り返し文字数)
-let JpCountChars = 35
+let JpCountChars = 37
 "" 日本語の行の連結時には空白を入力しない。
 set formatoptions+=mM
 "" 現在行を整形
@@ -157,6 +157,12 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'nvie/vim-rst-tables'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'vim-scripts/po.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'junegunn/vim-easy-align'
+
+filetype plugin on
 
 call neobundle#end()
 

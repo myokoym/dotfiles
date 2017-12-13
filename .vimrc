@@ -45,10 +45,13 @@ set whichwrap=b,s,h,l,<,>,[,]
 "タブをタブとして扱う（スペースに展開しない）
 "set noexpandtab
 
+autocmd ColorScheme default highlight Visual ctermbg=15
+colorscheme default
+
 "ペースト時にインデントしない
 "有効にするとautoindentやend補完がおかしくなる
 "set paste
-set pastetoggle=<C-E>
+set pastetoggle=<C-e>
 
 "行末の空白をハイライトする
 augroup HighlightTrailingSpaces
@@ -85,7 +88,7 @@ map g/ <Plug>(incsearch-stay)
 
 " JpFormat.vim
 "" 原稿文字数(全角の折り返し文字数)
-let JpCountChars = 37
+let JpCountChars = 35
 "" 日本語の行の連結時には空白を入力しない。
 set formatoptions+=mM
 "" 現在行を整形
@@ -110,11 +113,17 @@ autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 " nerdtree
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 2
+"let g:NERDTreeDirArrows=0
 let NERDTreeWinSize = 25
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 if !argc()
   autocmd vimenter * NERDTree|normal gg3j
 endif
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " ----------------------------------------------------
 "   neobundle
@@ -154,13 +163,18 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'nvie/vim-rst-tables'
+"NeoBundle 'nvie/vim-rst-tables'
+"NeoBundle 'Rykka/clickable.vim'
+"NeoBundle 'Rykka/riv.vim'
+NeoBundle 'vim-scripts/rest.vim'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'vim-scripts/po.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'fuenor/qfixgrep'
+"NeoBundle 'thinca/vim-qfreqlace'
+NeoBundle 'PProvost/vim-ps1'
+NeoBundle 'hotwatermorning/auto-git-diff'
 
 filetype plugin on
 

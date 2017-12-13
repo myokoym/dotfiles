@@ -3,9 +3,9 @@ syntax on
 set autoindent
 "バックアップファイルを作るディレクトリ
 set backupdir=$HOME/vimbackup
-"ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
+"ファイル選択ダイアログの初期ディレクトリを開いているファイルと同じディレクトリに設定
 set browsedir=buffer
-"クリップボードをWindowsと連携
+"ヤンクしたテキストをデスクトップのクリップボードにコピー
 set clipboard=unnamed
 "Vi互換をオフ
 set nocompatible
@@ -13,7 +13,7 @@ set nocompatible
 set directory=$HOME/vimbackup
 "タブの代わりに空白文字を挿入する
 set expandtab
-"変更中のファイルでも、保存しないで他のファイルを表示
+"編集中のファイルを保存せずに他のファイルへ切り替え可能にする
 set hidden
 "インクリメンタルサーチを行う
 set incsearch
@@ -23,8 +23,9 @@ set incsearch
 "set listchars=eol:$,tab:>\ ,extends:<
 "行番号を表示する
 set number
-"シフト移動幅
-"set shiftwidth=4
+"ファイル内の<Tab>文字を画面上の見た目で何文字分に展開するか
+set tabstop=8
+"シフトオペレータ(>>や<<)などで挿入/削除されるインデントの幅
 set shiftwidth=2
 "閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch
@@ -34,22 +35,19 @@ set smartcase
 set smartindent
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
-"ファイル内の <Tab> が対応する空白の数
-"set tabstop=4
-set tabstop=8
 "カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 "検索をファイルの先頭へループしない
 "set nowrapscan
 
-"タブをタブとして扱う（スペースに展開しない）
+"入力された<Tab>文字をスペースに展開しない
 "set noexpandtab
 
 autocmd ColorScheme default highlight Visual ctermbg=15
 colorscheme default
 
 "ペースト時にインデントしない
-"有効にするとautoindentやend補完がおかしくなる
+"有効にするとautoindentやend補完が効かなくなる
 "set paste
 set pastetoggle=<C-e>
 
@@ -175,6 +173,7 @@ NeoBundle 'fuenor/qfixgrep'
 "NeoBundle 'thinca/vim-qfreqlace'
 NeoBundle 'PProvost/vim-ps1'
 NeoBundle 'hotwatermorning/auto-git-diff'
+NeoBundle 'ConradIrwin/vim-bracketed-paste'
 
 filetype plugin on
 

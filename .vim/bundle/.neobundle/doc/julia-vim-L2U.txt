@@ -37,7 +37,8 @@ LATEX TO UNICODE                              *julia-vim-L2U-introduction*
 In the Julia REPL, entering a LaTeX sequence such as `\alpha` and pressing the
 <Tab> key substitutes it with a Unicode character such as `α`. The Julia REPL
 also provides partial completions, and suggestions for possible completions
-upon repeated pressing of the <Tab> key.
+upon repeated pressing of the <Tab> key. Emojis are also available, with
+their names written between colons, e.g. `\:interrobang:` produces `⁉`.
 
 This Vim plug-in provides the same functionality, with some extensions:
   - when a partial sequence is found, suggestions are presented in a menu
@@ -155,6 +156,8 @@ The `\chi` is substituted right when the second backslash is entered, and the
 `\^2` is substituted when the following space is entered, before the equal
 sign.
 
+This feature does not currently work with emojis.
+
 This feature does not interfere with the <Tab> based substitution.
 
 ------------------------------------------------------------------------------
@@ -232,8 +235,10 @@ g:latex_to_unicode_suggestions
                 for partial matches. By default, this is set to 1 (active),
                 unless a plug-in which is known to be incompatible with it is
                 detected. Currently, known incompatible plug-ins are
-                YouCompleteMe (https://github.com/Valloric/YouCompleteMe) and
-                neocomplcache (https://github.com/Shougo/neocomplcache.vim).
+                YouCompleteMe (https://github.com/Valloric/YouCompleteMe),
+                neocomplcache (https://github.com/Shougo/neocomplcache.vim),
+                neocomplete (https://github.com/Shougo/neocomplete.vim) and
+                deoplete (https://github.com/Shougo/deoplete.nvim),
 
                 This variable can be set at any time, changes will immediately
                 take effect.

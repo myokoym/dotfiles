@@ -1,5 +1,6 @@
 JpFormat.vim
 agit.vim
+auto-git-diff
 emmet-vim
 html5.vim
 incsearch.vim
@@ -8,6 +9,8 @@ neobundle.vim
 nerdtree
 nerdtree-git-plugin
 po.vim
+qfixgrep
+rest.vim
 rust.vim
 tcomment_vim
 unite.vim
@@ -16,9 +19,9 @@ vim-easy-align
 vim-endwise
 vim-fugitive
 vim-go
+vim-ps1
 vim-quickrun
 vim-rails
-vim-rst-tables
 vim-slim
 vim-surround
 vim-versions

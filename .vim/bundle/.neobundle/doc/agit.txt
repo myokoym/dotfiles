@@ -122,31 +122,73 @@ COMMANDS					*agit-commands*
 	If you specify !, this command uses |:!| instead of |system()|.
 	(Same as |fugitive|'s |:Git|)
 
+						*:AgitDiff*
+:AgitDiff [{revisions}]
+	Show |vimdiff| against the target file.
+	AgitDiff accepts target revision(s) as an argument.
+	Note: This command is available only in |agit-log| buffer from
+	|:AgitFile| and |agit-stat| buffer.
+
+	When launched from |agit-log| buffer, target of |:AgitFile| is treated
+	as target file.
+	When launched from |agit-stat| buffer, AgitDiff trys to pick target file
+	from cursor position. (see |<cfile>|)
+
+	If you installed |fugitive|, AgitDiff uses |fugitive| when showing staged
+	file. This means you can stage or unstage each hunks like |:Gdiff|.
+
+						*agit-diff-revspec*
+	revisions can be specified by almost same way as "git diff".
+	For example:
+
+	:AgitDiff (No revision specified)
+	show changes made by current revision
+
+	:AgitDiff REV1
+	show changes between REV1 and local
+
+	:AgitDiff REV1..REV2
+	show changes between REV1 and REV2
+
+	:AgitDiff REV1...REV2
+	show changes between marge_base(REV1, REV2) and REV2
+	marge_base(REV1, REV2) means "newest common ancestor of REV1 and REV2"
+
+	:AgitDiff REV1..
+	show changes between REV1 and HEAD ("HEAD" can be omitted)
+
 ------------------------------------------------------------------------------
 KEY-MAPPINGS					*agit-key-mappings*
 
-In |agit-log| buffer, the following key mappings can be used.
+The following key mappings can be used.
 (All of these mappings are buffer-local mappings)
+Available only in |agit-log| buffer unless explicitly mentioned.
 
 <Plug>(agit-scrolldown-stat)			*<Plug>(agit-scrolldown-stat)*
 	Scroll downwards the |agit-stat| window. The number of scroll lines is the
 	half a window.
+	Available in |agit-log|, |agit-diff|
+
 	TODO: Allow to customize the scroll size
 
 <Plug>(agit-scrollup-stat)			*<Plug>(agit-scrollup-stat)*
 	Scroll upwards the |agit-stat| window. The number of scroll lines is the
 	half a window.
+	Available in |agit-log|, |agit-diff|
 
 <Plug>(agit-scrolldown-diff)			*<Plug>(agit-scrolldown-diff)*
 	Scroll upwards the |agit-diff| window. The number of scroll lines is the
 	half a window.
+	Available in |agit-log|, |agit-stat|
 
 <Plug>(agit-scrollup-diff)			*<Plug>(agit-scrollup-diff)*
 	Scroll downwards the |agit-diff| window. The number of scroll lines is the
 	half a window.
+	Available in |agit-log|, |agit-stat|
 
 <Plug>(agit-reload)				*<Plug>(agit-reload)*
-	Manually update the |agit-log| buffer.
+	Manually update the agit buffers.
+	Available in |agit-log|, |agit-stat|, |agit-diff|
 
 <PLug>(agit-yank-hash)				*<Plug>(agit-yank-hash)*
 	Yank the hash of the commit under the cursor
@@ -156,6 +198,7 @@ In |agit-log| buffer, the following key mappings can be used.
 
 <PLug>(agit-exit)				*<Plug>(agit-exit)*
 	Exit from agit.
+	Available in |agit-log|, |agit-stat|, |agit-diff|
 
 <Plug>(agit-git-checkout)			*<Plug>(agit-git-checkout)*
 	Execute 'git checkout' to change the current branch which under the
@@ -190,6 +233,16 @@ In |agit-log| buffer, the following key mappings can be used.
 <Plug>(agit-git-revert)				*<Plug>(agit-git-revert)*
 	Execute 'git revert' to revert the cursor line commit.
 
+<Plug>(agit-diff)				*<Plug>(agit-diff)*
+	Show |vimdiff| against the target file of the current revision.
+	Availabie in |agit-log|, |agit-stat|
+
+<Plug>(agit-diff-with-local)			*<Plug>(agit-diff-with-local)*
+	Show |vimdiff| against the target file changes between current
+	revision and local.
+	Availabie in |agit-log|, |agit-stat|
+
+
 ------------------------------------------------------------------------------
 DEFAULT KEY-MAPPINGS				*agit-default-key-mappings*
 
@@ -209,6 +262,8 @@ rm			<Plug>(agit-git-reset)
 rh			<Plug>(agit-git-reset-hard)
 rb			<Plug>(agit-git-rebase)
 ri			<Plug>(agit-git-rebase-i)
+di			<Plug>(agit-diff)
+dl			<Plug>(agit-diff-with-local)
 
 ------------------------------------------------------------------------------
 VARIABLES					*agit-variables*
@@ -219,7 +274,7 @@ g:agit_no_default_mappings			*g:agit_no_default_mappings*
 	default value: 0
 
 g:agit_enable_auto_show_commit			*g:agit_enable_auto_show_commit*
-	If it is non-zero, |agit-stat| and |agit-diff|| buffers are
+	If it is non-zero, |agit-stat| and |agit-diff| buffers are
 	automatically updated when the cursor moved in |agit-log| buffer.
 	default value: 1
 
@@ -241,7 +296,7 @@ g:agit_skip_empty_line				*g:agit_skip_empty_line*
 	|agit-log| buffer.
 	default value: 1
 
-g:agit_localchanges_always_on_top		*g:agit_skip_empty_line*
+g:agit_localchanges_always_on_top		*g:agit_localchanges_always_on_top*
 	If it is non-zero, a message line of uncommitted changes is placed
 	always on the top of |agit-log|.
 	default value: 1
@@ -249,6 +304,15 @@ g:agit_localchanges_always_on_top		*g:agit_skip_empty_line*
 g:agit_ignore_spaces				*g:agit_ignore_spaces*
 	If it is non-zero, Agit ignore whitespace changes as showing
 	|agit-diff| and |agit-stat| buffer.
+	default value: 1
+
+g:agit_stat_width				*g:agit_stat_width*
+	Max columns of |agit-stat| buffer.
+	default value: 80
+
+g:agit_reuse_tab				*g:agit_reuse_tab*
+	If it is non-zero and there already is an Agit tab with same git
+	directory and layout as launching one, Agit reuse the existing tab.
 	default value: 1
 
 

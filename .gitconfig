@@ -12,6 +12,7 @@
 	st = status
 	di = diff
 	ci = commit
+	gv = "!f(){ git grep -n $* | peco | awk -F: '{print $1}' | xargs -I% bash -c 'vim "%" <&- <&2'; };f"
 [push]
 	default = simple
 [diff]

@@ -1,78 +1,89 @@
+" git clone https://github.com/clear-code/vim.d.git ~/.vim.d
 source ~/.vim.d/vimrc
+source ~/.vim.d/mapping.vim
+source ~/.vim.d/leader.vim
+source ~/.vim.d/plugin.vim
+source ~/.vim.d/japanese.vim
+source ~/.vim.d/plugin-settings/lightline.vim
+source ~/.vim.d/plugin-settings/JpFormat.vim
+source ~/.vim.d/plugin-settings/ctrlp.vim
+source ~/.vim.d/plugin-settings/vim-anzu.vim
+source ~/.vim.d/plugin-settings/vim-operator-surround.vim
+source ~/.vim.d/plugin-settings/altr.vim
 
-syntax on
-"新しい行のインデントを現在行と同じにする
-set autoindent
-"バックアップファイルを作るディレクトリ
-set backupdir=$HOME/vimbackup
-"ファイル選択ダイアログの初期ディレクトリを開いているファイルと同じディレクトリに設定
-set browsedir=buffer
-"ヤンクしたテキストをデスクトップのクリップボードにコピー
-set clipboard=unnamed
-"Vi互換をオフ
-set nocompatible
-"スワップファイル用のディレクトリ
-set directory=$HOME/vimbackup
-"タブの代わりに空白文字を挿入する
-set expandtab
-"編集中のファイルを保存せずに他のファイルへ切り替え可能にする
-set hidden
-"インクリメンタルサーチを行う
-set incsearch
-" TODO
-set hlsearch
-nnoremap <ESC><ESC> :noh<CR>
-"nnoremap <C-h> :set hlsearch!<CR>
-"タブ文字、行末など不可視文字を表示する
-"set list
-"listで表示される文字のフォーマットを指定する
-"set listchars=eol:$,tab:>\ ,extends:<
-"行番号を表示する
-set number
-"閉じ括弧が入力されたとき、対応する括弧を表示する
-set showmatch
-"検索時に大文字を含んでいたら大/小を区別
-set smartcase
-"新しい行を作ったときに高度な自動インデントを行う
-"set smartindent
-"カーソルを行頭、行末で止まらないようにする
-set whichwrap=b,s,h,l,<,>,[,]
-"検索をファイルの先頭へループしない
-"set nowrapscan
+" バッファを記憶しておく
+" TODO: ディレクトリごとに記憶したい
+exec 'set viminfo=%,' . &viminfo
 
-"ファイル内の<Tab>文字を画面上の見た目で何文字分に展開するか
-set tabstop=8
-"シフトオペレータ(>>や<<)などで挿入/削除されるインデントの幅
-set shiftwidth=2
-"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
-set smarttab
-"入力された<Tab>文字をスペースに展開しない
-"set noexpandtab
+" https://stackoverflow.com/questions/2147875/what-vim-commands-can-be-used-to-quote-unquote-words
+" sはsurroundのs
+"nnoremap <Leader>s" ciw""<Esc>P
+"nnoremap <Leader>s' ciw''<Esc>P
+"nnoremap <Leader>s` ciw``<Esc>P
+"nnoremap <Leader>s( ciw()<Esc>P
+"nnoremap <Leader>s{ ciw{}<Esc>P
+"nnoremap <Leader>s[ ciw[]<Esc>P
 
-" ○や□の文字が崩れる問題を回避
-set ambiwidth=double
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
+nnoremap ]t :tabnext<CR>
+nnoremap [t :tabprev<CR>
+
+function! s:search(pat)
+  let l:cache = []
+  execute '%s/' . a:pat . '/\=add(l:cache, submatch(0))/n'
+  call setreg(v:register,join(l:cache, "\n"))
+endfunction
+command! -nargs=* SearchYank call s:search(<q-args>)
+
+"noremap <Leader>ceg :bufdo bd<CR>:call EditGitModifiedFiles()<CR>
+"noremap <silent> <Leader>cge :bufdo bd<CR>:call EditGitModifiedFiles()<CR>:BufExplorer<CR>
+
+"" 選択範囲でgrepしたい（試行中）
+vnoremap <Leader>vg y:vimgrep "<C-r>"" %<CR>
+vnoremap <Leader>vg y:Pt "<C-r>"" %<CR>
 
 autocmd ColorScheme default highlight Visual ctermbg=15
 colorscheme default
 
-"ペースト時にインデントしない
-"有効にするとautoindentやend補完が効かなくなる
-"set paste
-set pastetoggle=<C-e>
+"let g:ctrlp_dont_split = 'nerdtree'
+"let g:ctrlp_dont_split = 'NERD'
+"let g:ctrlp_dont_split = 'NERD_tree_1'
+"let g:ctrlp_dont_split = 'NERD_tree_2'
+"let g:ctrlp_cmd = ':NERDTreeClose\|CtrlP'
+"function! CtrlPCommand()
+"    let c = 0
+"    let wincount = winnr('$')
+"    " Don't open it here if current buffer is not writable (e.g. NERDTree)
+"    while !empty(getbufvar(+expand("<abuf>"), "&buftype")) && c < wincount
+"        exec 'wincmd w'
+"        let c = c + 1
+"    endwhile
+"    exec 'CtrlP'
+"endfunction
+"let g:ctrlp_cmd = 'call CtrlPCommand()'
 
-"行末の空白をハイライトする
-augroup HighlightTrailingSpaces
-  autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
-  autocmd VimEnter,WinEnter * match TrailingSpaces /\t\+\|\s\+$/
-augroup END
+" vim-altr
+" source ~/.vim.d/plugin-settings/altr.vim に移動
+"call altr#define('%.js', '%.controller.js', '%.html')
+"call altr#define('%.service.js', '%.service.spec.js')
+""call altr#define('%.controller.js', '%.html')
+"call altr#define('doc/source/%.rst', 'doc/locale/ja/LC_MESSAGES/%.po')
 
-" vimgrepで常にquickfix-windowを開く（|cw する）
-autocmd QuickFixCmdPost *grep* cwindow
+"" alternate.vim
+"" The actual {extension -> extensions} map
+"call lh#alternate#register_extension('g', 'js'  , g:alternates.extensions.js + ['html'])
+"call lh#alternate#register_extension('g', 'html', g:alternates.extensions.html + ['js'])
+"" The {filetype -> extensions} map
+""let g:alternates.ft.cpp += ['tpp']
 
-" vim-endwise
-let g:endwise_no_mappings = 1
-autocmd FileType lua,ruby,sh,zsh,vb,vbnet,aspvbs,vim imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
+" FSwitch
+"au! BufEnter *.js let b:fswitchdst = 'html' | let b:fswitchlocs = '../inc'
+"au! BufEnter *.html let b:fswitchdst = 'js' | let b:fswitchlocs = '../inc'
+
+"" vim-expand-region
+"vmap v <Plug>(expand_region_expand)
+"vmap <C-v> <Plug>(expand_region_shrink)
 
 " po.vim
 "let g:po_translator="Masafumi Yokoyama <yokoyama@clear-code.com>"
@@ -106,48 +117,13 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-" JpFormat.vim
-"" 原稿文字数(全角の折り返し文字数)
-let JpCountChars = 35
-"" 日本語の行の連結時には空白を入力しない。
-set formatoptions+=mM
-"" 現在行を整形
-nnoremap <silent> gl :JpFormat<CR>
-vnoremap <silent> gl :JpFormat<CR>
-"" 自動整形のON/OFF切替
-"" 30gCの様にカウント指定すると、現バッファのみ折り返し文字数を指定されたカウントに変更します。
-nnoremap <silent> gc :JpFormatToggle<CR>
-"" 現バッファを整形
-nnoremap <silent> g,rJ :JpFormatAll<CR>
-"" 原稿枚数カウント
-nnoremap <silent> g,rc :JpCountPages!<CR>
-"" 外部ビューアを起動する
-nnoremap <silent> <F8> :JpExtViewer<CR>
-
 " Enable slim syntax highlight
 autocmd FileType slim setlocal foldmethod=indent
 autocmd BufNewFile,BufRead *.slim set filetype=slim
 
 autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 
-" nerdtree
-let g:NERDTreeShowBookmarks = 1
-let g:NERDTreeChDirMode = 2
-"let g:NERDTreeDirArrows=0
-let NERDTreeWinSize = 25
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-if !argc()
-  autocmd vimenter * NERDTree|normal gg3j
-endif
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" vim-edgemotion
-map <C-j> <Plug>(edgemotion-j)
-map <C-k> <Plug>(edgemotion-k)
 
 "" カーソル位置の単語をgrep検索
 "nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
@@ -208,84 +184,6 @@ map <C-k> <Plug>(edgemotion-k)
 ""let g:airline#extensions#default#section_truncate_width = {}
 ""let g:airline#extensions#whitespace#enabled = 1
 
-" lightline.vim
-set laststatus=2
-set showtabline=2
-let g:lightline = {
-      \ 'colorscheme': 'default',
-      \ 'active': {
-      \   'left': [
-      \             [ 'readonly', 'filename', 'modified' ],
-      \           ],
-      \   'right': [
-      \              [ 'gitbranch' ],
-      \              [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'mode', 'paste' ],
-      \            ]
-      \ },
-      \ 'inactive': {
-      \   'left': [
-      \             [ 'readonly', 'filename', 'modified' ],
-      \           ],
-      \   'right': [
-      \              [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \            ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'bufferinfo': 'lightline#buffer#bufferinfo',
-      \   'filename': 'LightLineFilename',
-      \ },
-      \ 'tabline': {
-      \   'left': [[ 'bufferbefore', 'buffercurrent', 'bufferafter' ]],
-      \   'right': [],
-      \ },
-      \ 'component_expand': {
-      \   'buffercurrent': 'lightline#buffer#buffercurrent',
-      \   'bufferbefore': 'lightline#buffer#bufferbefore',
-      \   'bufferafter': 'lightline#buffer#bufferafter',
-      \ },
-      \ 'component_type': {
-      \   'buffercurrent': 'tabsel',
-      \   'bufferbefore': 'raw',
-      \   'bufferafter': 'raw',
-      \ },
-      \ 'component': {
-      \   'separator': '',
-      \ },
-      \ }
-function! LightLineFilename()
-  return expand('%')
-endfunction
-" remap arrow keys
-nnoremap <Left> :bprev<CR>
-nnoremap <Right> :bnext<CR>
-" lightline-buffer ui settings
-" replace these symbols with ascii characters if your environment does not support unicode
-"let g:lightline_buffer_logo = ' '
-"let g:lightline_buffer_readonly_icon = ''
-"let g:lightline_buffer_modified_icon = '✭'
-"let g:lightline_buffer_git_icon = ' '
-"let g:lightline_buffer_ellipsis_icon = '..'
-"let g:lightline_buffer_expand_left_icon = '◀ '
-"let g:lightline_buffer_expand_right_icon = ' ▶'
-"let g:lightline_buffer_active_buffer_left_icon = ''
-"let g:lightline_buffer_active_buffer_right_icon = ''
-"let g:lightline_buffer_separator_icon = '  '
-"
-" lightline-buffer function settings
-"let g:lightline_buffer_show_bufnr = 1
-"let g:lightline_buffer_rotate = 0
-"let g:lightline_buffer_fname_mod = ':t'
-"let g:lightline_buffer_excludes = ['vimfiler']
-"
-"let g:lightline_buffer_maxflen = 30
-"let g:lightline_buffer_maxfextlen = 3
-"let g:lightline_buffer_minflen = 16
-"let g:lightline_buffer_minfextlen = 3
-"let g:lightline_buffer_reservelen = 20
 
 " gtags
 "map <C-g> :Gtags
@@ -294,87 +192,62 @@ nnoremap <Right> :bnext<CR>
 "map <C-n> :cn<CR>
 "map <C-p> :cp<CR>
 
-" open-browser.vim
-"let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-
-" ----------------------------------------------------
-"   dein.vim
-" ----------------------------------------------------
-" プラグインが実際にインストールされるディレクトリ
-let s:dein_dir = expand('~/.vim/dein')
-" dein.vim 本体
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
-" dein.vim がなければ github から落としてくる
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-endif
-
-" 設定開始
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  "call dein#add('Shougo/vimproc.vim', {
-  "    \ 'build': {
-  "    \     'windows' : 'tools\\update-dll-mingw',
-  "    \     'cygwin'  : 'make -f make_cygwin.mak',
-  "    \     'mac'     : 'make -f make_mac.mak',
-  "    \     'linux'   : 'make',
-  "    \     'unix'    : 'gmake',
-  "    \    },
-  "    \ })
-  call dein#add('thinca/vim-quickrun')
-  call dein#add('tpope/vim-endwise')
-  call dein#add('mattn/emmet-vim')
-  call dein#add('cohama/agit.vim')
-  call dein#add('haya14busa/incsearch.vim')
-  "call dein#add('Shougo/unite.vim')
-  call dein#add('fuenor/JpFormat.vim')
-  call dein#add('tomtom/tcomment_vim')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('Xuyuanp/nerdtree-git-plugin')
-  call dein#add('othree/html5.vim')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-rhubarb')
-  call dein#add('tpope/vim-rails')
-  call dein#add('tpope/vim-surround')
-  call dein#add('vim-scripts/rest.vim')
-  call dein#add('junegunn/vim-easy-align')
-  call dein#add('ConradIrwin/vim-bracketed-paste')
-  call dein#add('haya14busa/vim-edgemotion')
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('taohex/lightline-buffer')
-  call dein#add('ctrlpvim/ctrlp.vim')
-  call dein#add('vim-jp/vimdoc-ja')
-  call dein#add('myokoym/insert-git-log.vim')
-  call dein#add('rking/ag.vim')
-  call dein#add('tyru/open-browser.vim')
-  call dein#add('rhysd/committia.vim')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('gregsexton/gitv')
-  call dein#add('AndrewRadev/gapply.vim')
-  call dein#add('kana/vim-gf-user')
-  call dein#add('kana/vim-gf-diff')
-  call dein#add('vim-scripts/gitdiff.vim')
-  call dein#add('clear-code/git-diff-unified.vim')
-  call dein#add('jlanzarotta/bufexplorer')
-  "call dein#add('Shougo/denite.nvim')
-  "call dein#add('Shougo/neoplete.nvim')
-
-  " 設定終了
-  call dein#end()
-  call dein#save_state()
-endif
-
-" もし、未インストールものものがあったらインストール
-if dein#check_install()
-  call dein#install()
-endif
+"" ----------------------------------------------------
+""   dein.vim
+"" ----------------------------------------------------
+"" プラグインが実際にインストールされるディレクトリ
+"let s:dein_dir = expand('~/.vim/dein')
+"" dein.vim 本体
+"let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+"
+"" dein.vim がなければ github から落としてくる
+"if &runtimepath !~# '/dein.vim'
+"  if !isdirectory(s:dein_repo_dir)
+"    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+"  endif
+"  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+"endif
+"
+"" 設定開始
+"if dein#load_state(s:dein_dir)
+"  call dein#begin(s:dein_dir)
+"
+"  "call dein#add('Shougo/vimproc.vim', {
+"  "    \ 'build': {
+"  "    \     'windows' : 'tools\\update-dll-mingw',
+"  "    \     'cygwin'  : 'make -f make_cygwin.mak',
+"  "    \     'mac'     : 'make -f make_mac.mak',
+"  "    \     'linux'   : 'make',
+"  "    \     'unix'    : 'gmake',
+"  "    \    },
+"  "    \ })
+"  "call dein#add('Shougo/unite.vim')
+"  call dein#add('fuenor/JpFormat.vim')
+"  call dein#add('tomtom/tcomment_vim')
+"  call dein#add('tpope/vim-surround')
+"  call dein#add('vim-scripts/rest.vim')
+"  call dein#add('junegunn/vim-easy-align')
+"  call dein#add('itchyny/lightline.vim')
+"  call dein#add('taohex/lightline-buffer')
+"  call dein#add('ctrlpvim/ctrlp.vim')
+"  call dein#add('rhysd/committia.vim')
+"  "call dein#add('airblade/vim-gitgutter')
+"  call dein#add('gregsexton/gitv')
+"  call dein#add('AndrewRadev/gapply.vim')
+"  "call dein#add('Shougo/denite.nvim')
+"  "call dein#add('Shougo/neoplete.nvim')
+"  call dein#add('terryma/vim-expand-region.vim')
+"  call dein#add('skalnik/vim-vroom')
+"
+"  " 設定終了
+"  call dein#end()
+"  call dein#save_state()
+"endif
+"
+"" もし、未インストールものものがあったらインストール
+"if dein#check_install()
+"  call dein#install()
+"endif
 
 "" ----------------------------------------------------
 ""   neobundle

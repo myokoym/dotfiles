@@ -2,3 +2,6 @@ set main-view = date author:width=16 commit-title:graph=yes,refs=yes
 bind main    R !git rebase -i %(commit)
 bind diff    R !git rebase -i %(commit)
 bind generic Y @bash -c "echo -n '%(commit)' | xclip -selection clipboard"
+bind main    ! ?git revert %(commit)
+bind main G !@hub browse -- commit/%(commit)
+bind diff G !@hub browse -- commit/%(commit)

@@ -1,5 +1,8 @@
+#source ~/.zsh.d/zshrc
+
 # LANG
 export LANG=ja_JP.UTF-8
+#export LANG=C
 
 # KEYBIND
 bindkey -v
@@ -9,12 +12,17 @@ bindkey "" history-incremental-search-backward
 PROMPT='%{%(?..$fg[red])%}%%%{$reset_color%} '
 PROMPT2="> "
 SPROMPT="%r is correct? [n,y,a,e]: "
-RPROMPT='[%{$fg[magenta]%}$(ruby -e "print RUBY_VERSION, %(p), RUBY_PATCHLEVEL") `rprompt-git-current-branch`%F{cyan}%~%f]'
-RPROMPT2="%K{green}%_%k"
+#RPROMPT='[%{$fg[magenta]%}$(ruby -e "print RUBY_VERSION, %(p), RUBY_PATCHLEVEL") `rprompt-git-current-branch`%F{cyan}%~%f]'
+RPROMPT='[`rprompt-git-current-branch`%F{cyan}%~%f]'
+#RPROMPT2="%K{green}%_%k"
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
 ## 入力が右端まで来たらRPROMPTを消す
 setopt transient_rprompt
+# Pure
+#fpath=( "$HOME/.zfunctions" $fpath )
+#autoload -U promptinit; promptinit
+#prompt pure
 
 # ${fg[...]} や $reset_color をロード
 autoload -U colors; colors
@@ -45,17 +53,16 @@ function rprompt-git-current-branch {
     echo "%{$color%}$name%{$reset_color%} "
 }
 
-
-# HISTORY
+# HISTORY {{{
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 ## history (fc -l) コマンドをヒストリリストから取り除く。
-setopt hist_no_store
+#setopt hist_no_store
 ## ヒストリファイルに追記する。
 setopt append_history
 ## すぐにヒストリファイルに追記する。
-#setopt inc_append_history
+setopt inc_append_history
 ## 直前と同じコマンドをヒストリに追加しない
 setopt hist_ignore_dups
 ## zsh の開始, 終了時刻をヒストリファイルに書き込む
@@ -65,7 +72,7 @@ setopt hist_verify
 ## ヒストリを共有
 setopt share_history
 ## コマンドラインの先頭がスペースで始まる場合ヒストリに追加しない
-setopt hist_ignore_space
+#setopt hist_ignore_space
 
 # 補完
 autoload -Uz compinit
@@ -158,7 +165,7 @@ alias -g WC="| wc"
 alias -g LC="| wc -l"
 alias -g Z="| tail"
 alias -g CB="| xclip -selection clipboard"
-
+alias -g SQLF="| java -jar ~/.ghq/github.com/sambatriste/sql-formatter/binary/sql-formatter-1.0.0-jar-with-dependencies.jar"
 
 # 以下は.bashrcと共用
 
@@ -184,6 +191,12 @@ alias l='ls -CF'
 alias lt='ls -AltrF'
 alias hi='history'
 alias hii='history 1'
+alias ta='tree -a'
+alias vgd='vim `git diff --name-only HEAD`'
+alias agfind='ag --nocolor -g'
+alias ptfind='pt --nocolor -g'
+#alias open='vim'
+
 #alias ra=rails
 alias g=git
 alias rre='rbenv rehash'
@@ -229,7 +242,7 @@ alias gg='git grep'
 # touchpad disabled
 #xinput set-prop 10 "Device Enabled" 0
 
-export VIMRUNTIME=/usr/share/vim/vim74
+export VIMRUNTIME=/usr/share/vim/vim81
 
 # connect wireless lan
 #sudo rmmod -f acer-wmi
@@ -267,7 +280,7 @@ export MROONGA_CLONE_DIR=$HOME/work/groonga/mroonga.clean
 export MROONGA_GITHUB_COM_PATH=$HOME/work/groonga/mroonga.github.com
 
 # pkg-config
-export PKG_CONFIG_PATH=/tmp/local/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+#export PKG_CONFIG_PATH=/tmp/local/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 
 export LD_LIBRARY_PATH=/tmp/local/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
 export PATH=/tmp/local/bin:$PATH
@@ -277,33 +290,33 @@ export PATH=/tmp/local/bin:$PATH
 #ssh-add
 
 # Ruby-GNOME2
-rg2home=~/work/ruby/ruby-gnome2
-for name in glib2 \
-            atk \
-            cairo-gobject \
-            clutter \
-            clutter-gstreamer \
-            clutter-gtk \
-            gdk3 \
-            gdk_pixbuf2 \
-            gio2 \
-            gobject-introspection \
-            gstreamer \
-            gtk2 \
-            gtk3 \
-            gtksourceview2 \
-            gtksourceview3 \
-            gvlc \
-            pango \
-            poppler \
-            rsvg2 \
-            vte \
-            vte3 \
-            webkit-gtk \
-            webkit-gtk2
-do
-  export LD_LIBRARY_PATH=$rg2home/$name/ext/$name:$LD_LIBRARY_PATH
-done
+#rg2home=~/work/ruby/ruby-gnome2
+#for name in glib2 \
+#            atk \
+#            cairo-gobject \
+#            clutter \
+#            clutter-gstreamer \
+#            clutter-gtk \
+#            gdk3 \
+#            gdk_pixbuf2 \
+#            gio2 \
+#            gobject-introspection \
+#            gstreamer \
+#            gtk2 \
+#            gtk3 \
+#            gtksourceview2 \
+#            gtksourceview3 \
+#            gvlc \
+#            pango \
+#            poppler \
+#            rsvg2 \
+#            vte \
+#            vte3 \
+#            webkit-gtk \
+#            webkit-gtk2
+#do
+#  export LD_LIBRARY_PATH=$rg2home/$name/ext/$name:$LD_LIBRARY_PATH
+#done
 
 function chpwd {
   [ -n $TMUX ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD
@@ -314,9 +327,68 @@ function tmux_neww {
 zle -N tmux_neww
 bindkey "" tmux_neww
 
-export PATH=$PATH:~/packer/
-export GOPATH=~/go
-export PATH=$PATH:~/go/bin/
+## cdr
+if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
+    autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+    add-zsh-hook chpwd chpwd_recent_dirs
+    zstyle ':completion:*' recent-dirs-insert both
+    zstyle ':chpwd:*' recent-dirs-default true
+    zstyle ':chpwd:*' recent-dirs-max 1000
+    zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
+fi
+# }}}
+
+# PECO {{{
+# peco
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
+
+function peco-ghq-look () {
+    local ghq_roots="$(git config --path --get-all ghq.root)"
+    local selected_dir=$(ghq list --full-path | \
+        xargs -I{} ls -dl --time-style=+%s {}/.git | sed 's/.*\([0-9]\{10\}\)/\1/' | sort -nr | \
+        sed "s,.*\(${ghq_roots/$'\n'/\|}\)/,," | \
+        sed 's/\/.git//' | \
+        peco --prompt="cd-ghq >" --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd $(ghq list --full-path | grep --color=never -E "/$selected_dir$")"
+        zle accept-line
+    fi
+}
+
+zle -N peco-ghq-look
+bindkey '^G' peco-ghq-look
+
+function peco-cdr () {
+    local selected_dir="$(cdr -l | sed 's/^[0-9]\+ \+//' | peco --prompt="cdr >" --query "$LBUFFER")"
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+}
+zle -N peco-cdr
+bindkey '^E' peco-cdr
+
+#function peco_open_recent_file() {
+#  vim (egrep '^>' ~/.viminfo | cut -c3- | perl -E 'say for map { chomp; $_ =~ s/^~/$ENV{HOME}/e; -f $_ ? $_ : () } <STDIN>' | peco)
+#}
+#zle -N peco_open_recent_file
+#bindkey '^V' peco_open_recent_file
+#
+function peco-tree(){
+  local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`|-' | xargs echo)
+  BUFFER="$EDITOR $SELECTED_FILE"
+  zle accept-line
+}
+zle -N peco-tree
+bindkey "^V" peco-tree
+# }}}
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
@@ -325,8 +397,15 @@ eval "$(pyenv virtualenv-init -)"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+export PATH=$PATH:~/packer/
+#export GOPATH=~/go
+#export PATH=$PATH:$GOBIN
 export GOPATH=$HOME/.go
-export PATH=$GOPATH/bin:$PATH
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH
+
+export NIMBLE_PATH=$HOME/.nimble
+export PATH=$NIMBLE_PATH/bin:$PATH
 
 export GRNENV_HOME=$HOME/.grnenv
 export PATH=$GRNENV_HOME/bin:$GRNENV_HOME/shims:$PATH
@@ -335,3 +414,7 @@ eval "$(grnenv export)"
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
+
+if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
+  zcompile ~/.zshrc
+fi
